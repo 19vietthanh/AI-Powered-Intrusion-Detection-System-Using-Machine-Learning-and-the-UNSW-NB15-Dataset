@@ -1,70 +1,150 @@
-Network Intrusion Detection System using SVM
+Intrusion Detection System Using SVM on UNSW-NB15 Dataset
 Overview
-This project implements a Network Intrusion Detection System (NIDS) using Support Vector Machine (SVM) classification. The system is trained on the UNSW-NB15 dataset to detect and classify network attacks.
+This project implements an Intrusion Detection System (IDS) using a Support Vector Machine (SVM) classifier on the UNSW-NB15 dataset. The goal is to classify network traffic as normal or malicious (attack) based on various features extracted from the dataset.
 
-Features
-Data preprocessing and feature engineering
-SVM model implementation with balanced class weights
-Feature importance analysis
-Model evaluation with multiple metrics
-Real-time intrusion detection capability
-Model persistence for future use
+Table of Contents
+Introduction
+Dataset
 Project Structure
+Installation
+Usage
+Results
+Visualization
+Intrusion Detection Function
+Dependencies
+Contributing
+License
+Acknowledgments
+Introduction
+Intrusion detection is a critical component of cybersecurity. This project leverages machine learning techniques to detect potential threats in network traffic. By training an SVM classifier on the UNSW-NB15 dataset, we aim to achieve high accuracy in distinguishing between normal and attack behaviors.
+
+Dataset
+The UNSW-NB15 dataset is a comprehensive dataset for network intrusion detection research. It contains modern normal activities and contemporary synthesized attack behaviors. The dataset includes:
+
+Features: 49 attributes representing flow features.
+Labels: Binary labels indicating normal or attack traffic.
+Attack Categories: Detailed attack types for multi-class classification.
+Note: Ensure that the UNSW_NB15_training-set.parquet file is placed in the repository directory.
+
+Project Structure
+Data Loading and Exploration
+Importing necessary libraries.
+Loading the dataset using Pandas.
+Displaying initial data insights (head, info, describe).
+Checking for missing values.
+Data Visualization
+Plotting the distribution of the target variable (label).
+Visualizing the distribution of attack categories (attack_cat).
+Data Preprocessing
+Encoding categorical variables using LabelEncoder.
+Separating features and target variable.
+Splitting the data into training and testing sets.
+Sampling a subset of the training data for computational efficiency.
+Scaling features using StandardScaler.
+Model Training
+Initializing the SVM classifier with class_weight='balanced' to handle class imbalance.
+Training the model on the sampled data.
+Feature Importance
+Calculating feature importance using permutation importance.
+Plotting the top 15 most important features.
+Model Evaluation
+Making predictions on the test set.
+Generating a classification report.
+Plotting the confusion matrix.
+Plotting the ROC curve and calculating the AUC score.
+Model Saving and Deployment
+Saving the trained model, scaler, and label encoders using joblib.
+Implementing an intrusion detection function for new data prediction.
+Installation
+Clone the Repository
+
+
 ```
-├── UNSW_NB15_training-set.parquet    # Training dataset
-├── main.py                           # Main implementation file
-├── svm_model_balanced.joblib         # Saved SVM model
-├── scaler_balanced.joblib            # Saved feature scaler
-└── label_encoders_balanced.joblib    # Saved label encoders
+git clone https://github.com/your_username/your_repository.git
+```
+```
+cd your_repository
+```
+Set Up a Virtual Environment (Optional)
+
+
+```
+python -m venv venv
+```
+```
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
+```
+pip install pandas numpy matplotlib seaborn scikit-learn joblib
+```
+Place the Dataset
+
+Ensure the UNSW_NB15_training-set.parquet file is in the project directory.
+
+
+
+Results
+Classification Report
+
+The SVM classifier achieved the following performance on the test set:
+
+```
+SVM Classifier Report with class_weight='balanced':
+              precision    recall  f1-score   support
+
+           0       0.99      0.93      0.96     37000
+           1       0.83      0.98      0.90     13000
+
+    accuracy                           0.94     50000
+   macro avg       0.91      0.96      0.93     50000
+weighted avg       0.95      0.94      0.94     50000
+```
+Confusion Matrix
+
+The confusion matrix illustrates the correct and incorrect predictions made by the model.
+
+ROC Curve and AUC
+
+The model's ROC curve with an AUC score of 0.98 indicates excellent performance in distinguishing between classes.
+
+Visualization
+Distribution of Target Variable
+Distribution of Target Variable
+
+Distribution of Attack Categories
+Distribution of Attack Categories
+
+Top 15 Most Important Features
+Top 15 Important Features
+
+Confusion Matrix
+Confusion Matrix
+
+ROC Curve
+ROC Curve
+
+Note: The images directory should contain the PNG files generated during the script execution.
+
+Intrusion Detection Function
+The detect_intrusions function allows for real-time detection on new data samples.
+
+Function Definition:
+
+
+```
+def detect_intrusions(model, scaler, le_dict, data_row):
+    # Preprocess the data row
+    # Encode categorical variables
+    # Scale the features
+    # Predict using the trained model
+    return prediction[0], probability
 ```
 Dependencies
+Python 3.x
+Libraries:
 pandas
 numpy
 matplotlib
 seaborn
 scikit-learn
 joblib
-Installation
-Clone the repository
-```
-git clone [repository-url]
-```
-```
-cd [repository-name]
-```
-Install required packages
-```
-pip install pandas numpy matplotlib seaborn scikit-learn joblib
-```
-Usage
-Ensure you have the UNSW_NB15_training-set.parquet file in your project directory
-Run the main script:
-
-```
-python main.py
-```
-Model Features
-The system analyzes various network traffic features including:
-
-Protocol types
-Service types
-Connection statistics
-Flow statistics
-Attack categories
-Model Performance
-The SVM model is evaluated using:
-
-Classification Report
-Confusion Matrix
-ROC Curve
-AUC Score
-Real-time Detection
-The system includes a detect_intrusions() function for real-time intrusion detection on new network traffic data.
-
-Visualizations
-The project includes various visualizations:
-
-Distribution of attack types
-Feature importance plots
-ROC curves
-Confusion matrices
