@@ -110,7 +110,6 @@ The following visualizations are generated during model training and evaluation:
 * Confusion Matrix
 * ROC Curve
 
-**Note:** The images directory contains all PNG files generated during script execution.
 
 ## Dependencies
 * Python 3.x
