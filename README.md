@@ -65,8 +65,8 @@ The UNSW-NB15 dataset is a comprehensive dataset for network intrusion detection
 
 1. Clone the Repository
 ```bash
-git clone https://github.com/your_username/your_repository.git
-cd your_repository
+git clone https://github.com/killua173/AI-Powered-Intrusion-Detection-System-Using-Machine-Learning-and-the-UNSW-NB15-Dataset
+cd AI-Powered-Intrusion-Detection-System-Using-Machine-Learning-and-the-UNSW-NB15-Dataset
 ```
 
 2. Set Up a Virtual Environment (Optional)
